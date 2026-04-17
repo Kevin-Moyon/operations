@@ -22,8 +22,10 @@ const [num1,setNum1]= useState<number | string>("");
           <img src={reactLogo} className="framework" alt="React logo" />
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
+        <h1>Calculator</h1> 
+        <p>Enter two numbers to get the instant sum.</p>
         <div>
-          <h1>First Number</h1>
+          <h2>First Number</h2>
           <input 
           type = 'number' 
           value = {num1} 
@@ -32,7 +34,7 @@ const [num1,setNum1]= useState<number | string>("");
         </div>
 
         <div>
-          <h1>Second Number</h1>
+          <h2>Second Number</h2>
           <input 
           type = 'number' 
           value = {num2} 
