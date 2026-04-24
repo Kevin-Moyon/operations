@@ -4,10 +4,10 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
-// Importamos los nuevos componentes
 import { Menu } from './components/Menu'
 import { Addition } from './components/Addition'
 import { Calculator } from './components/Calculator'
+import { Search } from './components/Search'
 
 function App() {
   const [view, setView] = useState<'menu' | 'addition' | 'calculator' | 'search'>('menu');
@@ -26,12 +26,7 @@ function App() {
 
       {view === 'calculator' && <Calculator onBack={() => setView('menu')} />}
 
-      {view === 'search' && (
-        <>
-          <h1>Search</h1>
-          <button className="back-btn" onClick={() => setView('menu')} style={{ marginTop: '20px' }}>Back</button>
-        </>
-      )}
+      {view === 'search' && <Search onBack={() => setView('menu')} />}
     </section>
   )
 }

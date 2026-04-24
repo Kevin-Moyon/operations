@@ -16,7 +16,7 @@ export const Calculator = ({ onBack }: CalculatorProps) => {
             const result = new Function(`return ${display.replace('x', '*').replace('/', '/')}`)();
             setDisplay(String(result));
         } catch {
-            alert("Error en la expresión");
+            alert("Error in the expression");
         }
     };
 
