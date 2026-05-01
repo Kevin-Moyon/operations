@@ -3,10 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../models/routes.model';
 import { type DisneyCharacter } from '../../models/disney.model';
 import { getCharacters } from '../../api/disney.api';
+import { StatsSummary } from '../molecules/StatsSummary';
 import { Button } from '../atoms/Button';
 import './Search.css';
 
 export const Search = () => {
+
+    const [stats, setStats] = useState<Record<string, number>>({});
+
     const [query, setQuery] = useState('');
     const [characters, setCharacters] = useState<DisneyCharacter[]>([]);
     const [selectedChar, setSelectedChar] = useState<DisneyCharacter | null>(null);
@@ -18,6 +22,18 @@ export const Search = () => {
         try {
             const data = await getCharacters(name);
             setCharacters(data);
+
+            const counts = data.reduce((acc: Record<string, number>, char: any) => {
+                if (char.tvShows && char.tvShows.length > 0) {
+                    char.tvShows.forEach((show: string) => {
+                        acc[show] = (acc[show] || 0) + 1;
+                    });
+                }
+                return acc;
+            }, {});
+
+            setStats(counts);
+
         } catch (error) {
             console.error("Error fetching Disney characters:", error);
         } finally {
@@ -69,6 +85,8 @@ export const Search = () => {
                     className="counter"
                 />
             </div>
+
+            {!loading && <StatsSummary stats={stats} />}
 
             <div className="results-grid">
                 {loading ? (
