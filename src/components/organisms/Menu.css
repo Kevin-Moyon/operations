@@ -1,0 +1,33 @@
+#center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 40px;
+    background-color: var(--bg-main);
+}
+
+.header-simple {
+    text-align: center;
+}
+
+.main-title {
+    font-size: 3rem;
+    margin: 0;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    color: var(--accent);
+    margin-top: 10px;
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
