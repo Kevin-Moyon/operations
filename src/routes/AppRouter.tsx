@@ -3,6 +3,7 @@ import { Routes } from '../models/routes.model';
 import { AdditionPage } from '../pages/AdditionPage';
 import { HomePage } from '../pages/HomePage';
 import { CalculatorPage } from '../pages/CalculatorPage';
+import { SearchPage } from '../pages/SearchPage';
 
 
 export const AppRouter = () => {
@@ -14,6 +15,7 @@ export const AppRouter = () => {
 
                 <Route path={Routes.ADDITION} element={<AdditionPage />} />
                 <Route path={Routes.CALCULATOR} element={<CalculatorPage />} />
+                <Route path={Routes.SEARCH} element={<SearchPage />} />
 
                 <Route path="*" element={<div>404 - Página no encontrada</div>} />
             </ReactRoutes>
