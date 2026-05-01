@@ -1,0 +1,26 @@
+.custom-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+    padding: 0;
+    font-size: 16px;
+    border-radius: 8px;
+    text-align: center;
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+    cursor: pointer;
+}
+
+.custom-btn:hover {
+    border-color: var(--accent-border);
+}
+
+.counter {}
+
+.back-btn {
+    margin: 20px auto;
+}
