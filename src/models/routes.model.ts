@@ -1,8 +1,8 @@
 export const Routes = {
     HOME: '/',
     ADDITION: '/addition',
-    DISNEY: '/disney',
-    GIFS: '/gifs'
+    CALCULATOR: '/calculator',
+    SEARCH: '/search'
 } as const;
 
 

@@ -1,7 +1,8 @@
 :root {
-    --accent: #646cff;
-    --accent-bg: #242424;
-    --accent-border: #535bf2;
+    --accent: #a370f7;
+    --accent-bg: #2d2a3d;
+    --accent-border: #646cff;
+    --bg-main: #13131a;
 }
 
 #root {
@@ -14,8 +15,7 @@
 
 body {
     margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+    background-color: var(--bg-main);
+    color: white;
+    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
