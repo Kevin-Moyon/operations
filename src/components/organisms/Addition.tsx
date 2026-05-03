@@ -1,25 +1,21 @@
-import { useState } from 'react';
+import './Addition.css';
 
-interface AdditionProps {
-    onBack: () => void;
-}
+import type { AdditionProps } from '../../models/Addition.model';
+import { useAddition } from '../../hooks/useAddition';
+import { Button } from '../atoms/Button';
+import { Input } from '../atoms/Input';
+
 
 export const Addition = ({ onBack }: AdditionProps) => {
-    const [num1, setNum1] = useState<number | string>("");
-    const [num2, setNum2] = useState<number | string>("");
-
-    const calculateSum = () => {
-        const sum = Number(num1) + Number(num2);
-        alert(`The result is: ${sum}`);
-    };
+    const { num1, num2, setNum1, setNum2, calculateSum } = useAddition();
 
     return (
-        <>
+        <div id="center">
             <h1>Addition Mode</h1>
             <p>Enter two numbers to get the instant sum.</p>
-            <div>
+            <div className='button-group'>
                 <h2>First Number</h2>
-                <input
+                <Input
                     type='number'
                     value={num1}
                     onChange={(e) => setNum1(e.target.value)}
@@ -34,9 +30,9 @@ export const Addition = ({ onBack }: AdditionProps) => {
                     placeholder="Type second number" />
             </div>
             <div style={{ marginTop: '20px' }}>
-                <button className="counter" onClick={calculateSum}>Calculate Sum</button>
-                <button className="back-btn" onClick={onBack}>Back</button>
+                <Button className="counter" onClick={calculateSum} label="Calculate Sum" />
+                <Button className="back-btn" onClick={onBack} label="Back" />
             </div>
-        </>
+        </div>
     );
 };

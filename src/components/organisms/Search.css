@@ -1,0 +1,127 @@
+.search-page {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.search-bar-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-bar-container input {
+    flex: 1;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #2d2a3d;
+    color: white;
+    font-size: 1rem;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.character-card {
+    background: #1e1b29;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    border: 2px solid transparent;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.character-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
+
+.details-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.flex-container {
+    display: flex;
+    gap: 40px;
+    background: #1e1b29;
+    padding: 30px;
+    border-radius: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.main-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 15px;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+}
+
+.info-panel {
+    max-width: 400px;
+    text-align: left;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-bar-container {
+        flex-direction: column;
+    }
+
+    .main-img {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+    }
+
+    .flex-container {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .info-panel {
+        text-align: center;
+    }
+}

@@ -1,46 +1,49 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Routes } from '../../models/routes.model';
+import { type DisneyCharacter } from '../../models/disney.model';
+import { getCharacters } from '../../api/disney.api';
+import { StatsSummary } from '../molecules/StatsSummary';
+import { Button } from '../atoms/Button';
+import './Search.css';
 
+export const Search = () => {
 
-export interface DisneyCharacter {
-    _id: number;
-    name: string;
-    imageUrl?: string;
-    films: string[];
-    shortFilms: string[];
-    tvShows: string[];
-    videoGames: string[];
-    allies: string[];
-    enemies: string[];
-    parkAttractions: string[];
-}
+    const [stats, setStats] = useState<Record<string, number>>({});
 
-interface SearchProps {
-    onBack: () => void;
-}
-
-export const Search = ({ onBack }: SearchProps) => {
     const [query, setQuery] = useState('');
     const [characters, setCharacters] = useState<DisneyCharacter[]>([]);
     const [selectedChar, setSelectedChar] = useState<DisneyCharacter | null>(null);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const fetchCharacters = async (name?: string) => {
+    const handleSearch = async (name?: string) => {
         setLoading(true);
         try {
-            const url = name
-                ? `https://api.disneyapi.dev/character?name=${encodeURIComponent(name)}` : `https://api.disneyapi.dev/character`;
-            const response = await fetch(url);
-            const res = await response.json();
-            const data = Array.isArray(res.data) ? res.data : [res.data];
-            setCharacters(data.filter(Boolean));
+            const data = await getCharacters(name);
+            setCharacters(data);
+
+            const counts = data.reduce((acc: Record<string, number>, char: any) => {
+                if (char.tvShows && char.tvShows.length > 0) {
+                    char.tvShows.forEach((show: string) => {
+                        acc[show] = (acc[show] || 0) + 1;
+                    });
+                }
+                return acc;
+            }, {});
+
+            setStats(counts);
+
         } catch (error) {
-            console.error("Error:", error);
+            console.error("Error fetching Disney characters:", error);
         } finally {
             setLoading(false);
         }
     };
 
-    useEffect(() => { fetchCharacters(); }, []);
+    useEffect(() => {
+        handleSearch();
+    }, []);
 
     if (selectedChar) {
         return (
@@ -58,9 +61,11 @@ export const Search = ({ onBack }: SearchProps) => {
                         </div>
                     </div>
                 </div>
-                <button className="back-btn" onClick={() => setSelectedChar(null)}>
-                    Back to Gallery
-                </button>
+                <Button
+                    label="Back to Gallery"
+                    onClick={() => setSelectedChar(null)}
+                    className="back-btn"
+                />
             </div>
         );
     }
@@ -74,14 +79,18 @@ export const Search = ({ onBack }: SearchProps) => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-                <button className="counter" onClick={() => fetchCharacters(query)}>
-                    Search
-                </button>
+                <Button
+                    label="Search"
+                    onClick={() => handleSearch(query)}
+                    className="counter"
+                />
             </div>
+
+            {!loading && <StatsSummary stats={stats} />}
 
             <div className="results-grid">
                 {loading ? (
-                    <p>Loading...</p>
+                    <p className="loading-text">Loading characters...</p>
                 ) : (
                     characters.map(char => (
                         <div key={char._id} className="character-card" onClick={() => setSelectedChar(char)}>
@@ -95,9 +104,11 @@ export const Search = ({ onBack }: SearchProps) => {
                 )}
             </div>
 
-            <button className="back-btn" onClick={onBack} style={{ marginTop: '20px' }}>
-                Back to Menu
-            </button>
+            <Button
+                label="Back to Menu"
+                onClick={() => navigate(Routes.HOME)}
+                className="back-btn"
+            />
         </div>
     );
 };
