@@ -1,4 +1,5 @@
 import React from 'react';
+import './StatsSummary.css';
 
 interface StatsSummaryProps {
     stats: Record<string, number>;
@@ -17,32 +18,13 @@ export const StatsSummary: React.FC<StatsSummaryProps> = ({
         .slice(0, 3);
 
     return (
-        <div className="stats-summary" style={{
-            margin: '20px 0',
-            padding: '15px',
-            backgroundColor: 'var(--accent-bg)',
-            borderRadius: '8px',
-            textAlign: 'center',
-            color: 'white'
-        }}>
-            <h2 style={{ fontSize: '1.2rem', marginBottom: '10px' }}>{title}</h2>
-            <p>These characters appear in <strong>{totalShows}</strong> programas de TV.</p>
+        <div className="stats-summary-container">
+            <h2 className="stats-summary-title">{title}</h2>
+            <p>These characters appear in <strong>{totalShows}</strong> TV programs.</p>
 
-            <div style={{
-                display: 'flex',
-                gap: '10px',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                marginTop: '10px'
-            }}>
+            <div className="stats-badges-wrapper">
                 {topShows.map(([show, count]) => (
-                    <span key={show} style={{
-                        padding: '5px 12px',
-                        background: '#513a66',
-                        borderRadius: '20px',
-                        fontSize: '0.85rem',
-                        border: 'var(--accent-border)',
-                    }}>
+                    <span key={show} className="stats-badge">
                         {show}: <strong>{count}</strong>
                     </span>
                 ))}
