@@ -1,0 +1,29 @@
+.stats-summary-container {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: var(--accent-bg);
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+}
+
+.stats-summary-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.stats-badges-wrapper {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.stats-badge {
+    padding: 5px 12px;
+    background-color: #513a66;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: var(--accent-border);
+}
